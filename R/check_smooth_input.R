@@ -22,15 +22,14 @@ check_smooth_input <- function(DF){
     for(i in 1:length(req_cols)){
         if(!(req_cols[i] %in% names(DF))){
             warning(
-                "Missing column ", req_cols[i], " which should represnt ",
+                "Missing column ", req_cols[i], " which should represent ",
                 names(req_cols)[i])
         }
     }
 
     if(length(setdiff(names(DF), req_cols)) == 0){
         warning(
-            "Data should have at least one column in addition to ",
-            "the required columns.")
+            "Data should have one or more columns corresponding to group IDs ")
     }
 
     uni_yrs <- unique(DF$Year)
@@ -44,8 +43,7 @@ check_smooth_input <- function(DF){
 
     if(!all(sort(unique(DF$Sex)) == c("Female", "Male"))){
         warning(
-            "Sex column must be character with two and only two values ",
-            "of Female and Male")
+            "Sex column must be a string equal to 'Female' or 'Male'")
     }
 
     if(!is.numeric(DF$value)){
@@ -54,7 +52,7 @@ check_smooth_input <- function(DF){
 
     if(!all(as.numeric(unique(DF$Age5)) == 1:18)){
         warning(
-            "Age5 column should be factor with 18 levels or integers 1 ",
+            "Age5 column should be a factor with 18 levels or integers 1 ",
             "through 18 representing 5 year age groups from 0 to 85+")
     }
 }
